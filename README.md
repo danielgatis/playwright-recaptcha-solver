@@ -25,10 +25,10 @@ npx playwright install chromium
 The library manages the browser lifecycle for you.
 
 ```ts
-import { solve } from 'playwright-recaptcha-solver'
+import { solve } from 'playwright-recaptcha-solver';
 
-const token = await solve('https://www.google.com/recaptcha/api2/demo')
-console.log(token)
+const token = await solve('https://www.google.com/recaptcha/api2/demo');
+console.log(token);
 ```
 
 ### Pass a Playwright `Page`
@@ -36,21 +36,21 @@ console.log(token)
 Use this when you already have a browser open and need to submit the form or do other actions after solving.
 
 ```ts
-import { chromium } from 'playwright'
-import { solve } from 'playwright-recaptcha-solver'
+import { chromium } from 'playwright';
+import { solve } from 'playwright-recaptcha-solver';
 
-const browser = await chromium.launch({ headless: false })
-const page = await browser.newPage()
+const browser = await chromium.launch({ headless: false });
+const page = await browser.newPage();
 
-await page.goto('https://www.google.com/recaptcha/api2/demo')
+await page.goto('https://www.google.com/recaptcha/api2/demo');
 
-const token = await solve(page)
+const token = await solve(page);
 
 // token is already set in g-recaptcha-response — submit the form
-await page.click('#recaptcha-demo-submit')
-await page.waitForSelector('.recaptcha-success')
+await page.click('#recaptcha-demo-submit');
+await page.waitForSelector('.recaptcha-success');
 
-await browser.close()
+await browser.close();
 ```
 
 ## API
@@ -63,20 +63,20 @@ Returns the `g-recaptcha-response` token.
 
 ### SolveOptions
 
-| Option | Type | Default | Description |
-|---|---|---|---|
-| `headless` | `boolean` | `true` | Run browser in headless mode. Only used when `input` is a URL. |
-| `proxy` | `string` | `undefined` | Proxy server URL, e.g. `socks5://127.0.0.1:9060`. Only used when `input` is a URL. |
-| `browserArgs` | `string[]` | `[]` | Extra Chromium launch arguments. Only used when `input` is a URL. |
-| `verbose` | `boolean` | `false` | Enable logging. |
-| `logger` | `Logger` | `console` | Custom logger. Only used when `verbose` is `true`. |
+| Option        | Type       | Default     | Description                                                                        |
+| ------------- | ---------- | ----------- | ---------------------------------------------------------------------------------- |
+| `headless`    | `boolean`  | `true`      | Run browser in headless mode. Only used when `input` is a URL.                     |
+| `proxy`       | `string`   | `undefined` | Proxy server URL, e.g. `socks5://127.0.0.1:9060`. Only used when `input` is a URL. |
+| `browserArgs` | `string[]` | `[]`        | Extra Chromium launch arguments. Only used when `input` is a URL.                  |
+| `verbose`     | `boolean`  | `false`     | Enable logging.                                                                    |
+| `logger`      | `Logger`   | `console`   | Custom logger. Only used when `verbose` is `true`.                                 |
 
 ### Logger interface
 
 ```ts
 interface Logger {
-  log(message: string): void
-  error(message: string): void
+  log(message: string): void;
+  error(message: string): void;
 }
 ```
 
@@ -89,7 +89,7 @@ Compatible with `console`, `winston`, `pino`, or any custom logger.
 ```ts
 const token = await solve('https://example.com', {
   proxy: 'socks5://127.0.0.1:9060',
-})
+});
 ```
 
 ### With verbose logging
@@ -97,15 +97,15 @@ const token = await solve('https://example.com', {
 ```ts
 const token = await solve('https://example.com', {
   verbose: true,
-})
+});
 ```
 
 ### With custom logger (e.g. pino)
 
 ```ts
-import pino from 'pino'
+import pino from 'pino';
 
-const logger = pino()
+const logger = pino();
 
 const token = await solve('https://example.com', {
   verbose: true,
@@ -113,28 +113,28 @@ const token = await solve('https://example.com', {
     log: (msg) => logger.info(msg),
     error: (msg) => logger.error(msg),
   },
-})
+});
 ```
 
 ### Multiple concurrent solves
 
 ```ts
-import { chromium } from 'playwright'
-import { solve } from 'playwright-recaptcha-solver'
+import { chromium } from 'playwright';
+import { solve } from 'playwright-recaptcha-solver';
 
-const browser = await chromium.launch()
+const browser = await chromium.launch();
 
 const tokens = await Promise.all(
   Array.from({ length: 5 }, async () => {
-    const page = await browser.newPage()
-    await page.goto('https://www.google.com/recaptcha/api2/demo')
-    const token = await solve(page)
-    await page.close()
-    return token
+    const page = await browser.newPage();
+    await page.goto('https://www.google.com/recaptcha/api2/demo');
+    const token = await solve(page);
+    await page.close();
+    return token;
   })
-)
+);
 
-await browser.close()
+await browser.close();
 ```
 
 ## Building from source
@@ -148,6 +148,7 @@ npm run build
 ```
 
 ## Buy me a coffee
+
 Liked some of my work? Buy me a coffee (or more likely a beer)
 
 <a href="https://www.buymeacoffee.com/danielgatis" target="_blank"><img src="https://bmc-cdn.nyc3.digitaloceanspaces.com/BMC-button-images/custom_images/orange_img.png" alt="Buy Me A Coffee" style="height: auto !important;width: auto !important;"></a>

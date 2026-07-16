@@ -1,7 +1,18 @@
 {
   "name": "playwright-recaptcha-solver",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "description": "Solve reCAPTCHA v2 audio challenge using Playwright",
+  "keywords": [
+    "playwright",
+    "recaptcha",
+    "recaptcha-solver",
+    "recaptcha-v2",
+    "captcha",
+    "captcha-solving",
+    "automation",
+    "typescript",
+    "nodejs"
+  ],
   "license": "MIT",
   "type": "module",
   "main": "./dist/index.cjs",
@@ -19,17 +30,28 @@
       }
     }
   },
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "tsup",
-    "dev": "tsup --watch"
+    "dev": "tsup --watch",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
   },
   "dependencies": {
     "playwright": "^1.40.0"
   },
   "devDependencies": {
+    "@eslint/js": "^10.0.1",
     "@types/node": "^20.0.0",
+    "eslint": "^10.7.0",
+    "eslint-config-prettier": "^10.1.8",
+    "prettier": "^3.9.5",
     "tsup": "^8.0.0",
-    "typescript": "^5.0.0"
+    "typescript": "^5.0.0",
+    "typescript-eslint": "^8.64.0"
   }
 }
